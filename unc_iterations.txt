@@ -1,0 +1,1 @@
+Iteration       NormGrad          Cost      Rel. cost         Rel. x      Line-search interations
