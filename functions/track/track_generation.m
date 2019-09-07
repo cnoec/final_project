@@ -1,4 +1,4 @@
-function [track,innerBoundary,outerBoundary,N,x0,y0] = track_generation(track_number)
+function [track,innerBoundary,outerBoundary,N,x0,y0] = track_generation()
 
 % auxiliary function that generates the track and sets the initial
 % position. change the function called by track to change the shape.
@@ -21,13 +21,7 @@ function [track,innerBoundary,outerBoundary,N,x0,y0] = track_generation(track_nu
 
 % create and plot track
 
-if track_number == 1
-    track = circle_track();
-elseif track_number == 2
-    track = oval_track();
-elseif track_number == 3
-    track = random_track();
-end
+track = oval_track();
 
 % find inner and outer boundaries coordinates
 rb = roadBoundaries(track);

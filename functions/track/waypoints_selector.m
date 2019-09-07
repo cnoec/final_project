@@ -24,7 +24,4 @@ for i=1:count
     y   = [ innerBoundary(floor(i*N/count),2,1)  outerBoundary(floor(i*N/count),2,1)]';
     waypoints(i,1,1) =  mean(x);
     waypoints(i,2,1) =  mean(y);
-    plot(waypoints(i,1,1),waypoints(i,2,1),'.g')
-    txt = {i};
-    text(waypoints(i,1,1)+1,waypoints(i,2,1)+1,txt);
 end

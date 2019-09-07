@@ -51,7 +51,7 @@ run('Parameters.m');
 
 for ind=2:N
     input = [T_in(ind); delta_in(ind);];
-    xi(:,ind) = xi(:,ind-1)  + Ts*Vehicle_Model_Function(tau, xi(:,ind-1), input, d, theta);
+    xi(:,ind) = xi(:,ind-1)  + Ts*Vehicle_Model_Function( xi(:,ind-1), input, theta);
 end
 
 

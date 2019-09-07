@@ -1,4 +1,4 @@
-function [x_opt, exit_flag, debug_struct] = uncons_NLP_opt(fnc, x0, options)
+function [x_opt, exit_flag, debug_struct] = unc_NLP_opt(fnc, x0, options,filename)
 % Implmentation of NLP unconstrained problem
 
 %% general initialization
@@ -6,7 +6,7 @@ function [x_opt, exit_flag, debug_struct] = uncons_NLP_opt(fnc, x0, options)
 x_opt = 0;
 exit_flag = 0;
 if strcmp(options.display,'on')
-    F = fopen('unc_iterations.txt','w');
+    F               =   fopen(filename+".txt",'w');
     fprintf(F,'Iteration       NormGrad          Cost      Rel. cost         Rel. x      Line-search interations\r');
 end
 
