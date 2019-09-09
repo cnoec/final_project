@@ -3,7 +3,7 @@ function [FUNCTION_VALUE, point_index ,xi] = cost_function_gamma(u, xi0, T_end, 
 %         Input:  u: input (torque, delta)    COLUMN VECTOR
 %                 xi_0: initial conditions    COLUMN VECTOR
 %                 T_end: simulation time
-%                 Ts: time step for the numerical simulation
+%                 Ts: time step for the steering sampling (1e-1)
 %                 waypoints: vector of the point to follow    TALL MATRIX
 %                 gamma:  weigth of the penalty for the space traveled
 %
@@ -11,6 +11,7 @@ function [FUNCTION_VALUE, point_index ,xi] = cost_function_gamma(u, xi0, T_end, 
 Ts_sim = 1e-2;
 n_states = T_end/Ts_sim;
 n_wp = length(waypoints);
+
 [xi,~,~,~] = trajectory_generation_cc(u, xi0, T_end, Ts, Ts_sim);
 
 %% definition of Px Py

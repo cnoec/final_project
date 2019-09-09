@@ -18,10 +18,11 @@ run('initial_guess_setting');
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Initialization is complete! \n');
 
-%% Step 1 :
+%% Step 1 optimization
 
 run('step1_main.m');
 
+%% Step 1 printign
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 1 is complete! \n');
 
@@ -41,20 +42,21 @@ hold on
 plot(xi_step1(1,:), xi_step1(2,:), '.r');
 hold off
 
-%% Step 2 :
+%% Step 2 optimization
 
 run('step2_main.m');
 
+%%
+
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 2 is complete! \n');
-
 figure('Name','Step2_results')
 subplot 211
 plot(innerBoundary(:,1),innerBoundary(:,2),'black',outerBoundary(:,1),...
     outerBoundary(:,2),'black');grid on;axis equal;
     title('Optimal Solution Found at Step1 vs Optimal Solution Found at Step2');
 hold on
-plot(xi_step1(1,:), xi_step1(2,:), '.blue');
+plot(xi_in_step2(1,:), xi_in_step2(2,:), '.blue');
 hold off
 
 subplot 212
