@@ -6,6 +6,7 @@ path        =       pwd;
 addpath('functions');
 addpath('model');
 addpath('mat_data');
+addpath('steps');
 addpath('functions\unc_optimization');
 addpath('functions\con_optimization');
 addpath('functions\track');
@@ -18,13 +19,13 @@ run('initial_guess_setting');
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Initialization is complete! \n');
 
-%% Step 1 optimization
+%% Step 1 Optimization
 
 run('step1_main.m');
-
-%% Step 1 printign
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 1 is complete! \n');
+
+%% Step 1 Plots
 
 figure('Name','Step1_results')
 subplot 211
@@ -42,14 +43,14 @@ hold on
 plot(xi_step1(1,:), xi_step1(2,:), '.r');
 hold off
 
-%% Step 2 optimization
+%% Step 2 Optimization
 
 run('step2_main.m');
-
-%%
-
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 2 is complete! \n');
+
+%% Step 2 Plots
+
 figure('Name','Step2_results')
 subplot 211
 plot(innerBoundary(:,1),innerBoundary(:,2),'black',outerBoundary(:,1),...
@@ -66,13 +67,16 @@ hold on
 plot(xi_step2(1,:), xi_step2(2,:), '.r');
 hold off
 
-%% Step 3 :
+%% Step 3 Optimization
 
 run('step3_main.m');
 
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 3 is complete! \n');
 fprintf('\n *********************************************************************** \n');
+
+
+%% Step 3 Plots
 
 figure('Name','Step3_results')
 subplot 211
@@ -101,7 +105,7 @@ figure('Name','Torque_and_speed')
 subplot 211
 plot(t_vec(1:end-1),torque);grid;title('Torque');xlabel('time [s]');ylabel('Torque [Nm]');
 subplot 212
-plot(t_vec,xi(3,:));grid;title('Speed');xlabel('time [s]');ylabel('Speed [m/s]');
+plot(t_vec,xi_step3(3,:));grid;title('Speed');xlabel('time [s]');ylabel('Speed [m/s]');
 
 %% Analysis
 
