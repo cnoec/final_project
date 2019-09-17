@@ -28,7 +28,7 @@ myoptions.tolx                      =       1e-16;
 myoptions.ls_beta                   =       0.8;
 myoptions.ls_c                      =       .1;
 myoptions.ls_nitermax               =       1e2*3;
-myoptions.nitermax                  =       70;
+myoptions.nitermax                  =       50;
 myoptions.xsequence                 =       'on';   
 
 %% Constrained optimization
@@ -47,7 +47,7 @@ con_time                            =       toc;
 %% Trajectory generation
 
 [xi_step3, t_vec, ~,torque]         =       trajectory_generation_cc(u_opt_step3, xi0, T_end, Ts,1e-2);
-[xi_ini_step3, t_vec, ~,torque]         =       trajectory_generation_cc(u_0_step3, xi0, T_end, Ts,1e-2);
+[xi_in_step3, t_vec, ~,torque]     =       trajectory_generation_cc(u_0_step3, xi0, T_end, Ts,1e-2);
 
 save('mat_data\step3.mat','xi_step3','u_opt_step3','seq_step3','t_vec','torque');
 

@@ -84,7 +84,7 @@ plot(innerBoundary(:,1),innerBoundary(:,2),'black',outerBoundary(:,1),...
     outerBoundary(:,2),'black');grid on;axis equal;
     title('Optimal Solution Found at Step2 vs Optimal Solution');
 hold on
-plot(xi_step2(1,:), xi_step2(2,:), '.blue');
+plot(xi_in_step3(1,:), xi_in_step3(2,:), '.blue');
 hold off
 
 subplot 212
@@ -106,6 +106,8 @@ subplot 211
 plot(t_vec(1:end-1),torque);grid;title('Torque');xlabel('time [s]');ylabel('Torque [Nm]');
 subplot 212
 plot(t_vec,xi_step3(3,:));grid;title('Speed');xlabel('time [s]');ylabel('Speed [m/s]');
+
+savefig;
 
 %% Analysis
 
