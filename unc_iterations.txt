@@ -1,1 +1,0 @@
-Iteration       NormGrad          Cost      Rel. cost         Rel. x      Line-search interations        0    5.70360e+00   2.31729e-03    1.00000e+00    1.00000e+00                0   (INITIAL GUESS)

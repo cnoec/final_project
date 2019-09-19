@@ -15,12 +15,13 @@ F           =       (F + gamma*1e3)/1e6;
 
 g           =       [];
 
+limit       =       ones(length(xi(3,:)),1)*22;
+
 
 %% Inequality Constraints
 
 h_soft      =       [-(xi(2,end)-xi(2,1))+road_width/2;
                       (xi(2,end)-xi(2,1))+road_width/2;
-                       xi(3,1);
                      -(xi(1,end)-xi(1,1))+gamma;
                       (xi(1,end)-xi(1,1))+gamma;];
 

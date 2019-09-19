@@ -108,6 +108,12 @@ plot(t_vec(1:end-1),torque);grid;title('Torque');xlabel('time [s]');ylabel('Torq
 subplot 212
 plot(t_vec,xi_step3(3,:));grid;title('Speed');xlabel('time [s]');ylabel('Speed [m/s]');
 
+% for j = length(seq_step3)
+%     
+%     [xi_step3, t_vec, ~,torque]         =       trajectory_generation_cc(u_opt_step3, xi0, T_end, Ts,1e-2,"");
+%     
+% end
+
 %% Credits
 
 fprintf('\n Edoardo \n Stefano \n Sofia \n');
