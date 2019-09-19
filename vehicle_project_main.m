@@ -4,6 +4,7 @@ clc
 
 path        =       pwd;
 addpath('functions');
+addpath('figures');
 addpath('model');
 addpath('mat_data');
 addpath('steps');
@@ -107,10 +108,10 @@ plot(t_vec(1:end-1),torque);grid;title('Torque');xlabel('time [s]');ylabel('Torq
 subplot 212
 plot(t_vec,xi_step3(3,:));grid;title('Speed');xlabel('time [s]');ylabel('Speed [m/s]');
 
-savefig;
+%% Credits
 
-%% Analysis
-
-%edo
+fprintf('\n Edoardo \n Stefano \n Sofia \n');
+figure_saver_TOS('figures');
+save('mat_data\final');
 
 %%

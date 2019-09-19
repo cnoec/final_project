@@ -36,18 +36,20 @@ myoptions.xsequence                 =       'on';
 p                                   =       0;                  %# of nonlinear equality constraints
 q                                   =       5+n_iterations;     %# of nonlinear inequality constraints
 
+str                                 =       "yes";
+
 tic
 
 [u_opt_step3,~,~,~,seq_step3]       =       con_NLP_opt(@(u)( fun(u,xi0, T_end, Ts, ...
-                                            waypoints, n_wp , innerBoundary, outerBoundary,6)),...
-                                            u_0,[],[],[],[],p,q,myoptions,"step3_iterations");
+                                            waypoints, n_wp , innerBoundary, outerBoundary,6,str)),...
+                                            u_0_step3,[],[],[],[],p,q,myoptions,"step3_iterations");
 
 con_time                            =       toc;
 
 %% Trajectory generation
 
-[xi_step3, t_vec, ~,torque]         =       trajectory_generation_cc(u_opt_step3, xi0, T_end, Ts,1e-2);
-[xi_in_step3, t_vec, ~,torque]     =       trajectory_generation_cc(u_0_step3, xi0, T_end, Ts,1e-2);
+[xi_step3, t_vec, ~,torque]         =       trajectory_generation_cc(u_opt_step3, xi0, T_end, Ts,1e-2,"");
+[xi_in_step3, t_vec, ~,torque]      =       trajectory_generation_cc(u_0_step3, xi0, T_end, Ts,1e-2,"");
 
 save('mat_data\step3.mat','xi_step3','u_opt_step3','seq_step3','t_vec','torque');
 

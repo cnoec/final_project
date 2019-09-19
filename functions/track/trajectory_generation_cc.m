@@ -1,4 +1,4 @@
-function [xi, t_vec, end_check,Torque] = trajectory_generation_cc(u, xi_0, T_end, Ts_steer, Ts_sim)
+function [xi, t_vec, end_check,Torque] = trajectory_generation_cc(u, xi_0, T_end, Ts_steer, Ts_sim,str)
 %       Input:  u: input (torque, delta)
 %               xi_0: initial conditions
 %               T_end: simulation time
@@ -17,72 +17,92 @@ function [xi, t_vec, end_check,Torque] = trajectory_generation_cc(u, xi_0, T_end
 %       NOTA BENE: L'INPUT E' INTESO COME PRIMA TUTTE LE COPPIE E DOPO
 %       TUTTI GLI ANGOLI, DITEMI SE E' DA CAMBIARE
 
-%% vettore del tempo
+%% Time vector
 
-% path        =       pwd;
-% addpath( '..\Model' );
-% addpath( '..' );
+end_check           =       1;
+t_vec               =       0:Ts_sim:(T_end-Ts_sim);
+t_vec               =       t_vec';
+N                   =       length(t_vec);
+downsampling        =       Ts_steer/Ts_sim;
+n_ref               =       2;
 
-end_check = 1;
-t_vec = 0:Ts_sim:(T_end-Ts_sim);
-t_vec = t_vec';
-N = length(t_vec);
-downsampling = Ts_steer/Ts_sim;
-n_ref = 2;
-
-% if (length(u) ~= n_ref+N)
-%     n_ref = n_ref + 1;
-% end
+if strcmp (str,"yes")
+    
+    u_1             =       zeros(length(u)-1,1);
+    u_1(1:end)      =       u(1:end-1);
+    u               =       u_1;
+    
+    clear u_1
+    
+end
 
 for ind=1:(T_end/Ts_steer)
+    
     steer(((ind-1)*downsampling+1):ind*downsampling) = u(n_ref+ind);
+    
 end
 
-steer = steer.';
+steer               =       steer.';
 
-%% dimensional check
+%% Dimensional check
 
 if  length(steer) ~= length(t_vec)
-    end_check =  0;
-    xi=0;
-    disp('Errore dim');
+    
+    end_check       =       0;
+    xi              =       0;
+    disp('Dimensional Error!');
     return
+    
 end
 
-xi = zeros(6,N);
-xi(:,1) = xi_0;
+%% Parameters
+
+xi                  =       zeros(6,N);
+xi(:,1)             =       xi_0;
 
 load('parameters.mat');
 
 global num_dyn den_dyn num_int
-T_dyn = 0;
-T_int = 0;
-ek = u(1)-xi_0(3);
-ekm1 = ek;
+
+T_dyn               =       0;
+T_int               =       0;
+ek                  =       u(1)-xi_0(3);
+ekm1                =       ek;
 
 %% simulazione
 
 for ind=2:N
-    % Control action
-    T_int = min(Tdmax, max(Tdmin, T_int+num_int*[ek; ekm1]));
-    T_dyn = -den_dyn(1,2)*T_dyn + num_dyn*[ek; ekm1];
-    T_in = T_int + T_dyn;
-    % Saturation
-    T_in = min(Tdmax, T_in);
-    T_in = max(Tdmin, T_in);
     
-    Torque(ind-1) = T_in;
+    % Control action
+    
+    T_int           =       min(Tdmax, max(Tdmin, T_int+num_int*[ek; ekm1]));
+    T_dyn           =       -den_dyn(1,2)*T_dyn + num_dyn*[ek; ekm1];
+    T_in            =       T_int + T_dyn;
+    
+    % Saturation
+    
+    T_in            =       min(Tdmax, T_in);
+    T_in            =       max(Tdmin, T_in);
+    
+    Torque(ind-1)   =       T_in;
     
     % model integration
-    input = [T_in; steer(ind);];
-    xi(:,ind) = xi(:,ind-1)  + Ts_sim*Vehicle_Model_Function(xi(:,ind-1), input, theta);
+    
+    input           =       [T_in; 
+                            steer(ind);];
+    xi(:,ind)       =       xi(:,ind-1)  + Ts_sim*Vehicle_Model_Function(xi(:,ind-1), input, theta);
     
     % error update
-    ekm1 = ek;
+    
+    ekm1            =       ek;
+    
     if ind < floor(N/2)
-        ek = u(1) - xi(3,ind);
+        
+        ek          =       u(1) - xi(3,ind);
+        
     else
-        ek = u(2)- xi(3,ind);
+        
+        ek          =       u(2)- xi(3,ind);
+    
     end
- 
 end
