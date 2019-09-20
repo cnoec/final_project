@@ -4,9 +4,9 @@
 % By: Carraro Edoardo, Di Zenobio Stefano, Paganelli Sofia
 % Politecnico di Milano, September 2019
 %
-% Script to initialize and optimize the trajectory of a 6 d.o.f. nonlinear 
-% vehicle model using different approaches. 
-% Launch of the three different steps to find the optimal solution.
+% Script to initialize and simulate a 6 d.o.f. nonlinear vehicle model
+% using different simulation approaches. Launch of the three different
+% steps to find the optimal solution.
 
 %% Initial commands
 clear all
@@ -26,23 +26,21 @@ addpath('functions\cost_function');
 
 %% Initialization
 
-fprintf('Constrained Numerical Optimization for Estimation and Control\n')
-fprintf('Project: Time Lap minimization for a car running on a selected track\n');
-fprintf('By: Carraro Edoardo, Di Zenobio Stefano, Paganelli Sofia\n');
-fprintf('Politecnico di Milano, September 2019\n\n');
+fprintf('Constrained Numerical Optimization for Estimation and Control
+Project: Time Lap minimization for a car running on a selected track
+By: Carraro Edoardo, Di Zenobio Stefano, Paganelli Sofia
+Politecnico di Milano, September 2019');
 
 run('initial_guess_setting');
 
 fprintf('\n *********************************************************************** \n');
 fprintf('\n Initialization is complete! \n');
-fprintf('\n *********************************************************************** \n');
 
 %% Step 1 Optimization
 
 run('step1_main.m');
-
-fprintf('\n Step 1 is complete! \n');
 fprintf('\n *********************************************************************** \n');
+fprintf('\n Step 1 is complete! \n');
 
 %% Step 1 Plots
 
@@ -65,9 +63,8 @@ hold off
 %% Step 2 Optimization
 
 run('step2_main.m');
-
-fprintf('\n Step 2 is complete! \n');
 fprintf('\n *********************************************************************** \n');
+fprintf('\n Step 2 is complete! \n');
 
 %% Step 2 Plots
 
@@ -91,6 +88,7 @@ hold off
 
 run('step3_main.m');
 
+fprintf('\n *********************************************************************** \n');
 fprintf('\n Step 3 is complete! \n');
 fprintf('\n *********************************************************************** \n');
 
