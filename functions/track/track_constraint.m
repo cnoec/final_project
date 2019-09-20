@@ -1,10 +1,10 @@
 function in_track = track_constraint(xi,innerBoundary,outerBoundary,n_states,road_width)
-%
+% function that adds the constraints on the track
 % Inputs:   xi                  -   state vector returned by the simulation
-%           innerBoundary       -   matrix Nx3 - it contains the x,y,z
+%           innerBoundary       -   matrix Nx2 - it contains the x,y
 %                                   coordinates of the inner boundary
 %                                   samples. 
-%           outerBoundary       -   matrix Nx3 - it contains the x,y,z
+%           outerBoundary       -   matrix Nx2 - it contains the x,y
 %                                   coordinates of the outer boundary
 %                                   samples. 
 %           n_states            -   number of states the simulation returns
@@ -15,11 +15,13 @@ function in_track = track_constraint(xi,innerBoundary,outerBoundary,n_states,roa
 %                                   if the i-th number in the in_track vector is <0, 
 %                                   the car is out of the track
 
+% initialization
 dist        =   zeros(n_states/10,2);
 in_track    =   zeros(n_states/10,1);
 
 j = 1;
 
+% distances computation
 for i = 1:10:n_states 
     
    inBound_k            =  [ innerBoundary(j,1,1)  innerBoundary(j,2,1)]; 
