@@ -1,12 +1,33 @@
 function [y,gradient] = gradient_num_comp(fnc, xkr, method, dx)
-    %IT COMPUTE THE GRADIENT OF THE FUNCTION (TRANSPOSE OF THE JACOBIAN)
-    %[y, gradient] = gradient_num_comp(fnc, xkr, method, dx)
+% Computes the gradient of a given function, using one of several possible
+% methods.
+%   INPUTS:
+%           fnc         =   its gradient shall be evaluated. usually a
+%                           vector with length N
+%           xkr         =   value of the input argument where to evaluate
+%                           the gradient (dfun(x)/dx)'
+%           method      =   string indicating the differentiation method: 'FD' 
+%                           (Forward Finite Differences), 'CD' (Central
+%                           Finite Differences), 'UP' (User provided), 
+%                           'IM' (Imaginary-part trick).
+%           dx          =   perturbation step used in Finite Difference
+%                           approximation
+%
+%   OUTPUTS:
+%           y           =   value of fnc(xk)
+%           gradient    =   n-by-N matrix with in each column the
+%                           partial derivatives of the corresponding element 
+%                           of function fun(x) with respect to each 
+%                           component of x, evaluated at xk
+
+% Initialization 
+n = length(xkr);
+N = length(fnc(xkr));
+gradient = zeros(n,N);
+p = zeros(n,1);
     
-    n = length(xkr);
-    N = length(fnc(xkr));
-    gradient = zeros(n,N);
-    p = zeros(n,1);
-    
+
+% Gradient computation with different methods
 if strcmp(method, 'FD')
 
     p(1)=dx;

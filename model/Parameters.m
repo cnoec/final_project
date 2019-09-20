@@ -1,4 +1,6 @@
-%% Model parameters
+% Vehicle parameters taken from Canale et al., "Robust vehicle yaw control 
+% using an active differential and IMC techniques", Control Engineering
+% Practice 15, pp. 923-941, 2007
 
 m       =       1715;               % vehicle mass (kg)
 Jz      =       2700;               % vehicle moment of inertia (kg*m^2)

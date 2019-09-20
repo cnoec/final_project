@@ -1,24 +1,28 @@
 function [ waypoints ] = waypoints_selector(innerBoundary,outerBoundary, n_wp,N)
-% descrizione da scrivere una volta aggiunti anche i cerchi e i raggi 
+% function that chooses a priori the position of the waypoints, fiven the
+% number desired by the user.
 %
-% Inputs:   innerBoundary       -   matrix Nx3 - it contains the x,y,z
+% INPUTS:
+%           innerBoundary       -   matrix Nx2 - it contains the x,y
 %                                   coordinates of the inner boundary
 %                                   samples. 
-%           outerBoundary       -   matrix Nx3 - it contains the x,y,z
+%           outerBoundary       -   matrix Nx2 - it contains the x,y
 %                                   coordinates of the outer boundary
 %                                   samples. 
 %           N                   -   number of boundary samples
 %           n_wp                -   number of waypoints decided by the user
-%                                   in the main file (start and finish included)
+%                                   in the main file
 %
-% Outputs:  waypoints           -   matrix n_wpx3 - it contains the x,y,
+% OUTPUTS:  
+%           waypoints           -   matrix n_wpx2 - it contains the x,y
 %                                   coordinates of the waypoints, decided
 %                                   as the middle point of the track.
 
+% initialization
 waypoints = zeros(n_wp,3);
-
 count = n_wp;
 
+% computation of waypoints
 for i=1:count
     x   = [ innerBoundary(floor(i*N/count),1,1)  outerBoundary(floor(i*N/count),1,1)]';
     y   = [ innerBoundary(floor(i*N/count),2,1)  outerBoundary(floor(i*N/count),2,1)]';

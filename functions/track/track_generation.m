@@ -1,26 +1,20 @@
 function [track,innerBoundary,outerBoundary,N,x0,y0] = track_generation()
-
-% auxiliary function that generates the track and sets the initial
-% position. change the function called by track to change the shape.
-% 
-% Inputs:   track_number        -   1 ->  CIRCLE TRACK
-%                                   2 ->  OVAL TRACK
-%                                   3 ->  RANDOM TRACK
+% function that generates the track and sets the initial position.
 %
-% Outputs:  track               -   matrix  
-%           innerBoundary       -   matrix Nx3 - it contains the x,y,z
+% OUTPUTS:  
+%           track               =   object with all the track information
+%           innerBoundary       =   matrix Nx2 - it contains the x,y
 %                                   coordinates of the inner boundary
 %                                   samples. 
-%           outerBoundary       -   matrix Nx3 - it contains the x,y,z
+%           outerBoundary       =   matrix Nx2 - it contains the x,y
 %                                   coordinates of the outer boundary
 %                                   samples. 
-%           N                   -   number of boundary samples
-%           x0                  -   initial x coordinate
-%           y0                  -   initial y coordinate
+%           N                   =   number of boundary samples
+%           x0                  =   initial x coordinate
+%           y0                  =   initial y coordinate
 
 
 % create and plot track
-
 track = oval_track();
 
 % find inner and outer boundaries coordinates
@@ -48,26 +42,14 @@ innerBoundary = aux2;
 outerBoundary = aux1;
 clear aux1 aux2 
 
-% plot of track
-%plot(track)
-%camroll(-90)
-% figure
-% plot(innerBoundary(:,1),innerBoundary(:,2),'black',outerBoundary(:,1),...
-%     outerBoundary(:,2),'black'),grid on
-% axis equal
-% hold on
+innerBoundary(:,3) = [];
+outerBoundary(:,3) = [];
 
-% plot of finish line
-% line([innerBoundary(1,1,1) outerBoundary(1,1,1)],...
-%      [innerBoundary(1,2,1) outerBoundary(1,2,1)],'color','y','linewidth', 7) 
-% axis equal
-% hold on
-
+% initial position
 x0  = mean([innerBoundary(1,1,1) outerBoundary(1,1,1)]');
 y0  = mean([innerBoundary(1,2,1) outerBoundary(1,2,1)]');
 
-innerBoundary(:,3) = [];
-outerBoundary(:,3) = [];
+
 
 end
  

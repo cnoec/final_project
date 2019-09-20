@@ -1,3 +1,14 @@
+% Constrained Numerical Optimization for Estimation and Control
+%
+% Project: Time Lap minimization for a car running on a selected track
+% By: Carraro Edoardo, Di Zenobio Stefano, Paganelli Sofia
+% Politecnico di Milano, September 2019
+%
+% Script to initialize and simulate a 6 d.o.f. nonlinear vehicle model
+% using different simulation approaches. Launch of the three different
+% steps to find the optimal solution.
+
+%% Initial commands
 clear all
 close all
 clc

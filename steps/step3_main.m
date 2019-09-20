@@ -1,3 +1,14 @@
+%% Step 3: Constrained Closed Loop approach
+% the time is decreased and the constraints are formulated in order to 
+% maintain the vehicle inside the track boundaries and to make the vehicle
+% finisch one lap.
+% 
+% cost function used: fun
+% simulation time length: 26s
+% cruise control: yes
+% input: two speed references + output of step 2 + gamma for soft
+% constraint
+
 %% Initialization
 
 T_end                               =       26;

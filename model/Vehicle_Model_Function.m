@@ -6,20 +6,15 @@ function [xi_dot] = Vehicle_Model_Function(xi,u,theta)
 % lateral dynamics (assume longitudinal speed varies slowly with respect to
 % lateral dynamics)
 %
-% Inputs:   tau     (time - for use with ode45)
-%           xi      (model state)
-%           u       (braking/driving torque and steering angle)
-%           d       (lateral wind),
-%           
-%           theta   (model parameters)
+% INPUTS:  
+%           xi     =   model state
+%           u      =   braking/driving torque and steering angle           
+%           theta  =   model parameters
 %
-% Outputs:  xi_dot  (derivative of the state with respect to time)
-%           Forces  (longitudinal and lateral forces)
+% OUTPUTS:
+%           xi_dot =   derivative of the state with respect to time
 
-%% Read states
-
-g = 9.81;
-
+% Read states
 X       = xi(1,1);          % inertial X position (m)                 
 Y       = xi(2,1);          % inertial Y position (m)
 Ux      = xi(3,1);          % body x velocity (m/s)
@@ -27,14 +22,12 @@ beta    = xi(4,1);          % sideslip angle (rad)
 psi     = xi(5,1);          % yaw angle (rad)
 r       = xi(6,1);          % yaw rate (rad/s)
 
-%% Read inputs
-
+% Read inputs
 Td      = u(1,1);           % driving/braking torque (N*m)
 delta   = u(2,1);           % front wheel steering angle (rad)
-W       = 0;           % lateral wind speed (m/s)
+W       = 0;                % lateral wind speed (m/s)
 
-%% Parameter vector
-
+% Parameter vector
 m       = theta(1,1);       % vehicle mass (kg)
 Jz      = theta(2,1);       % vehicle moment of inertia (kg*m^2)
 a       = theta(3,1);       % distance between center of gravity and front axle (m)
@@ -48,10 +41,9 @@ Al      = theta(10,1);      % vehicle lateral surface (m^2)
 Cx      = theta(11,1);      % vehicle front aerodynamic drag coefficient
 Rr      = theta(12,1);      % rolling resistance coefficient(N*s/m)
 rho     = theta(13,1);      % air density (kg/m^3)
+g       = 9.81;
 
-
-%% Equations
-
+% Equations
 Uy      = tan( beta )*Ux;
 
 % Tire slip angles
@@ -62,8 +54,7 @@ alphar  = atan( (Uy - b*r)/(Ux) );
 zf      = tan(alphaf);
 zr      = tan(alphar);
 
-%% Forces
-
+% Forces
 % Vertical Loads
 Fzf     = m*g*( b/(a+b) );
 Fzr     = m*g*( a/(a+b) );
@@ -84,7 +75,7 @@ Fr      = Rr*Ux;
 % Aerodynamic longitudinal Force
 Fxd     = (1/2)*rho*Af*Cx*Ux^2;
 
-%% State equations
+% State equations
 
 X_dot        = Ux*cos(psi) - Uy*sin(psi);
 Y_dot        = Ux*sin(psi) + Uy*cos(psi);

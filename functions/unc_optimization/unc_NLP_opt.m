@@ -1,5 +1,29 @@
 function [x_opt, exit_flag, debug_struct] = unc_NLP_opt(fnc, x0, options,filename)
-% Implmentation of NLP unconstrained problem
+% Implmentation of NLP unconstrained problem. Attempt of solving the problem:
+%                   min f(x)            
+% and, if successful, returns a local minimizer x_opt.
+% The solver employs a quasi-Newton optimization scheme and back-tracking 
+% line search with Armijo condition.
+%
+%   INPUTS:
+%           fnc          =   cost function
+%           x0           =   initial guess for the optimization variables
+%           options      =   optimization options prepared with myoptimset
+%                            command
+%           filename     =   name of the file on which the iterations are
+%                            printed
+%
+%   OUTPUTS:
+%           x_opt        =   exit value, either a local minimizer or the
+%                            value of x at the last iterate
+%           exit_flag    =   termination condition:
+%                           -1: max. number of iterations reached
+%                            1: local minimum possible, gradient condition
+%                            2: local minimum possible, step size condition
+%                            3: local minimum possible, cost decrease condition
+%           debug_struct =   struct containing  the sequence, line search 
+%                            iteration number, the norm of the gradient and 
+%                            the cost.
 
 %% general initialization
 
